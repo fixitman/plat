@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://cdg82mh4ljjty"]
+
+[ext_resource type="Script" uid="uid://cg38bnrre8lx0" path="res://scenes/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://dk113jby5t1gh" path="res://assets/tilemap-characters.png" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://ktkd3xbf7ted" path="res://scripts/player_state_machine.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://cho0wuvu62bel" path="res://scenes/ground_state.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://b546tw8bmdw73" path="res://scripts/air_state.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://dup2gvlcu53yq" path="res://scripts/statelabel.gd" id="6_tuyoq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 9.0
+height = 29.414028
+
+[node name="Player" type="CharacterBody2D" unique_id=849719576]
+collision_mask = 6
+script = ExtResource("1_g2els")
+JUMP_VELOCITY = -275
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2099205809]
+position = Vector2(0, -12)
+texture = ExtResource("2_qhqgy")
+region_enabled = true
+region_rect = Rect2(0, 0, 24, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=75990870]
+position = Vector2(0, -11)
+scale = Vector2(1.1071424, 0.74794245)
+shape = SubResource("CapsuleShape2D_dqkch")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2125818135]
+limit_left = 0
+limit_top = -1000000
+limit_right = 1180
+limit_bottom = 180
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="PlayerStateMachine" type="Node" parent="." unique_id=1229840751 node_paths=PackedStringArray("current_state", "player")]
+script = ExtResource("3_qhqgy")
+current_state = NodePath("GroundState")
+player = NodePath("..")
+
+[node name="GroundState" type="Node" parent="PlayerStateMachine" unique_id=560227215 node_paths=PackedStringArray("air_state")]
+script = ExtResource("4_dqkch")
+air_state = NodePath("../AirState")
+jump_velocity = -400.0
+
+[node name="AirState" type="Node" parent="PlayerStateMachine" unique_id=404493304 node_paths=PackedStringArray("ground_state")]
+script = ExtResource("5_qlg0r")
+ground_state = NodePath("../GroundState")
+
+[node name="statelabel" type="Label" parent="." unique_id=1547525292 node_paths=PackedStringArray("state_machine")]
+offset_left = -49.0
+offset_top = -48.0
+offset_right = 41.0
+offset_bottom = -25.0
+text = "State: "
+script = ExtResource("6_tuyoq")
+state_machine = NodePath("../PlayerStateMachine")
