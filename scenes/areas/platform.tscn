@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b0ill0cud2kj0"]
+
+[ext_resource type="Script" uid="uid://bl4xmqvxmwi2a" path="res://scripts/platform.gd" id="1_baj1r"]
+[ext_resource type="TileSet" uid="uid://dn74cp1oi20pj" path="res://resources/green_ground.tres" id="1_d652o"]
+
+[node name="platform" type="Path2D" unique_id=2102155503]
+script = ExtResource("1_baj1r")
+duration = 10.0
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=1101715851]
+rotates = false
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="PathFollow2D" unique_id=918936596]
+collision_layer = 7
+collision_mask = 0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="PathFollow2D/AnimatableBody2D" unique_id=1366160694]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 14, 0, 7, 0, 0, 0, 2, 0, 0, 0, 0, 0, 14, 0, 7, 0, 0, 0, 3, 0, 0, 0, 0, 0, 15, 0, 7, 0, 0, 0)
+tile_set = ExtResource("1_d652o")
+use_kinematic_bodies = true
