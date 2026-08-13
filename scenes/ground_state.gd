@@ -11,7 +11,7 @@ func state_input(event: InputEvent) -> void:
 		next_state = air_state
 
 
-func state_physics_process(delta: float) -> void:
+func state_physics_process(_delta: float) -> void:
 	if !player.is_on_floor():
 		next_state = air_state		
 	pass

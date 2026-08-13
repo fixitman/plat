@@ -1,5 +1,4 @@
-extends Node
-class_name PlayerStateMachine
+class_name PlayerStateMachine extends Node
 @export var current_state: State
 @export var player: Player
 
@@ -15,7 +14,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	current_state.state_physics_process(delta)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if current_state.next_state != null:
 		switch_states(current_state.next_state)
 		

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c2nu5dg0q3ufw"]
+
+[ext_resource type="Script" uid="uid://cbr4hfoyghp11" path="res://scenes/areas/box.gd" id="1_mcago"]
+[ext_resource type="Script" uid="uid://cw3cv1oet2thk" path="res://00_General/hit-hurt_boxes/HurtBox.gd" id="2_wx2jw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bvic"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6nb3"]
+size = Vector2(20, 16)
+
+[node name="Box" type="StaticBody2D" unique_id=1892533892]
+collision_mask = 0
+script = ExtResource("1_mcago")
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=837974502]
+custom_minimum_size = Vector2(16, 16)
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.3347292, 0.4770341, 0.8591567, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=62291420]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_5bvic")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1583315184]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_wx2jw")
+metadata/_custom_type_script = "uid://cw3cv1oet2thk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1913900257]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_m6nb3")

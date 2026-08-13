@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dm73gkenfy6r"]
+
+[ext_resource type="Script" uid="uid://b5jmwtxr8ch4b" path="res://00_General/hit-hurt_boxes/HitBox.gd" id="1_toxvm"]
+
+[sub_resource type="Gradient" id="Gradient_byk4j"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lxesk"]
+gradient = SubResource("Gradient_byk4j")
+width = 16
+height = 4
+fill_from = Vector2(0, 0.0042735045)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxesk"]
+size = Vector2(16, 6)
+
+[node name="Fire" type="Area2D" unique_id=1797966165]
+collision_layer = 65535
+collision_mask = 0
+script = ExtResource("1_toxvm")
+damage = 1
+metadata/_custom_type_script = "uid://b5jmwtxr8ch4b"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1569711018]
+modulate = Color(0.6304939, 0.09162035, 0.19538239, 1)
+position = Vector2(0, 3)
+scale = Vector2(1, 1.546875)
+texture = SubResource("GradientTexture2D_lxesk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1383251885]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_lxesk")
+debug_color = Color(0.063522294, 0.6204562, 0.55078435, 0.41960785)
