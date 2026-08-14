@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b546tw8bmdw73" path="res://scripts/air_state.gd" id="2_gmlin"]
 [ext_resource type="Script" uid="uid://ktkd3xbf7ted" path="res://scripts/player_state_machine.gd" id="2_lvxji"]
 [ext_resource type="Script" uid="uid://cho0wuvu62bel" path="res://scenes/ground_state.gd" id="3_lvxji"]
-[ext_resource type="PackedScene" uid="uid://cj73c5yjgf5aa" path="res://00_General/hit-hurt_boxes/HurtBox.tscn" id="6_0owmy"]
+[ext_resource type="Script" uid="uid://cw3cv1oet2thk" path="res://00_General/hit-hurt_boxes/HurtBox.gd" id="6_0owmy"]
 [ext_resource type="Script" uid="uid://b5jmwtxr8ch4b" path="res://00_General/hit-hurt_boxes/HitBox.gd" id="6_75vfm"]
 
 [sub_resource type="Gradient" id="Gradient_3vyb7"]
@@ -21,10 +21,10 @@ fill_from = Vector2(0, 0.021367522)
 radius = 4.0
 height = 16.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxesk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8p8g"]
 size = Vector2(8, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8p8g"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bvic"]
 size = Vector2(8, 16)
 
 [node name="Player" type="CharacterBody2D" unique_id=849719576]
@@ -64,18 +64,9 @@ ground_state = NodePath("../GroundState")
 script = ExtResource("3_lvxji")
 air_state = NodePath("../AirState")
 
-[node name="HurtBox" parent="." unique_id=1618764354 instance=ExtResource("6_0owmy")]
-visible = false
-collision_mask = 512
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1882071108]
-position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_lxesk")
-debug_color = Color(0.9323683, 0.16527984, 0.50883484, 0.41960785)
-
 [node name="HitBox" type="Area2D" parent="." unique_id=2130456176]
-collision_layer = 4
-collision_mask = 0
+collision_layer = 0
+collision_mask = 512
 monitoring = false
 script = ExtResource("6_75vfm")
 metadata/_custom_type_script = "uid://b5jmwtxr8ch4b"
@@ -84,3 +75,13 @@ metadata/_custom_type_script = "uid://b5jmwtxr8ch4b"
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_d8p8g")
 debug_color = Color(0, 0.62351096, 0.53978425, 0.41960785)
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1392041683]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_0owmy")
+metadata/_custom_type_script = "uid://cw3cv1oet2thk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1320153345]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_5bvic")

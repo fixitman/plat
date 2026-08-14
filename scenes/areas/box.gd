@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-@export var hp = 5
+@export var hp = 25
 
 
 func take_damage(damage : int)-> void:

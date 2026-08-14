@@ -15,8 +15,8 @@ fill_from = Vector2(0, 0.0042735045)
 size = Vector2(16, 6)
 
 [node name="Fire" type="Area2D" unique_id=1797966165]
-collision_layer = 65535
-collision_mask = 0
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_toxvm")
 damage = 1
 metadata/_custom_type_script = "uid://b5jmwtxr8ch4b"
