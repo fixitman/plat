@@ -1,6 +1,8 @@
 class_name PlayerStateMachine extends Node
-@export var current_state: State
+
+@export var current_state: State 
 @export var player: Player
+var previous_state: State = null
 
 var states : Array[State] = []
 
@@ -22,11 +24,12 @@ func _input(event: InputEvent) -> void:
 	current_state.state_input(event)
 	
 func switch_states(new_state : State) -> void:
+	previous_state = current_state
 	if current_state != null:
 		current_state.exit()
 		current_state.next_state = null
 	
 	current_state = new_state
-	current_state.enter()
+	current_state.enter(previous_state)
 	
 	
