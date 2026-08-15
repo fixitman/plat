@@ -1,10 +1,33 @@
 [gd_scene format=3 uid="uid://b0ill0cud2kj0"]
 
-[ext_resource type="Script" uid="uid://bl4xmqvxmwi2a" path="res://scripts/platform.gd" id="1_baj1r"]
 [ext_resource type="TileSet" uid="uid://dn74cp1oi20pj" path="res://resources/green_ground.tres" id="1_d652o"]
 
+[sub_resource type="GDScript" id="GDScript_d652o"]
+script/source = "extends Path2D
+
+@export var duration := 3.0
+@export var return_trip := false
+
+@onready var path_follow_2d: PathFollow2D = $PathFollow2D
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:	
+	var tween = create_tween()
+	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	tween.set_loops()
+	tween.tween_property(path_follow_2d, \"progress_ratio\",1.0,duration)
+	if return_trip:
+		tween.tween_property(path_follow_2d, \"progress_ratio\",0,duration)
+	else:
+		tween.tween_property(path_follow_2d, \"progress_ratio\",0,0)
+	
+	
+	
+	
+"
+
 [node name="platform" type="Path2D" unique_id=2102155503]
-script = ExtResource("1_baj1r")
+script = SubResource("GDScript_d652o")
 duration = 10.0
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=1101715851]

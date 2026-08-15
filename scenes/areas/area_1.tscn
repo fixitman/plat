@@ -1,21 +1,49 @@
 [gd_scene format=3 uid="uid://ben8ukgdl7jhx"]
 
-[ext_resource type="PackedScene" uid="uid://c2nu5dg0q3ufw" path="res://scenes/areas/box.tscn" id="2_ay52s"]
 [ext_resource type="PackedScene" uid="uid://cdg82mh4ljjty" path="res://scenes/player/player.tscn" id="2_dgl8q"]
-[ext_resource type="PackedScene" uid="uid://bd6le014lqhab" path="res://scenes/areas/Plat.tscn" id="2_h3qae"]
+[ext_resource type="PackedScene" uid="uid://dtwc23qip6cuj" path="res://scenes/areas/Plat.tscn" id="2_h3qae"]
 [ext_resource type="PackedScene" uid="uid://dm73gkenfy6r" path="res://00_General/fire.tscn" id="3_h3qae"]
+[ext_resource type="Script" uid="uid://yaj05bnyuka3" path="res://scenes/areas/hud.gd" id="4_ay52s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxesk"]
 size = Vector2(1190, 16)
 
 [node name="area1" type="Node2D" unique_id=1656774705]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=342628907]
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=569289868]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_ay52s")
+
+[node name="Debug" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=1456012676]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VelocityY" type="Label" parent="CanvasLayer/HUD/Debug" unique_id=1035198216]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "velocity"
+
+[node name="Gravity" type="Label" parent="CanvasLayer/HUD/Debug" unique_id=890597172]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "gravity"
+
 [node name="Player" parent="." unique_id=849719576 instance=ExtResource("2_dgl8q")]
-position = Vector2(24, 160)
+unique_name_in_owner = true
+z_index = 10
+position = Vector2(213, 160)
 collision_layer = 2
 collision_mask = 1
 SPEED = 64.0
-JUMP_VELOCITY = -250.0
+JUMP_VELOCITY = -2000.0
 
 [node name="World" type="Node2D" parent="." unique_id=1259490127]
 
@@ -33,10 +61,8 @@ color = Color(0.13682577, 0.13682574, 0.13682571, 1)
 position = Vector2(595, 8)
 shape = SubResource("RectangleShape2D_lxesk")
 
-[node name="Box" parent="World" unique_id=1892533892 instance=ExtResource("2_ay52s")]
-position = Vector2(152, 144)
-
 [node name="Fire" parent="World" unique_id=1797966165 instance=ExtResource("3_h3qae")]
+z_as_relative = false
 position = Vector2(93, 160)
 
 [node name="1wayPlatform" parent="." unique_id=146597342 instance=ExtResource("2_h3qae")]

@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://cdg82mh4ljjty"]
 
 [ext_resource type="Script" uid="uid://cg38bnrre8lx0" path="res://scenes/player/player.gd" id="1_g2els"]
-[ext_resource type="Script" uid="uid://b546tw8bmdw73" path="res://scripts/air_state.gd" id="2_gmlin"]
-[ext_resource type="Script" uid="uid://ktkd3xbf7ted" path="res://scripts/player_state_machine.gd" id="2_lvxji"]
-[ext_resource type="Script" uid="uid://cho0wuvu62bel" path="res://scenes/ground_state.gd" id="3_lvxji"]
+[ext_resource type="Script" uid="uid://b546tw8bmdw73" path="res://scenes/player/air_state.gd" id="2_gmlin"]
+[ext_resource type="Script" uid="uid://ktkd3xbf7ted" path="res://scenes/player/player_state_machine.gd" id="2_lvxji"]
+[ext_resource type="Script" uid="uid://cho0wuvu62bel" path="res://scenes/player/ground_state.gd" id="3_lvxji"]
 [ext_resource type="Script" uid="uid://cw3cv1oet2thk" path="res://00_General/hit-hurt_boxes/HurtBox.gd" id="6_0owmy"]
 [ext_resource type="Script" uid="uid://b5jmwtxr8ch4b" path="res://00_General/hit-hurt_boxes/HitBox.gd" id="6_75vfm"]
-[ext_resource type="Script" uid="uid://b6axvdpg86bo0" path="res://scenes/attack_state.gd" id="6_qek5x"]
+[ext_resource type="Script" uid="uid://b6axvdpg86bo0" path="res://scenes/player/attack_state.gd" id="6_qek5x"]
+[ext_resource type="Script" uid="uid://dup2gvlcu53yq" path="res://scenes/player/statelabel.gd" id="8_qek5x"]
 
 [sub_resource type="Gradient" id="Gradient_3vyb7"]
 offsets = PackedFloat32Array(0.101626016, 1)
@@ -32,7 +33,8 @@ size = Vector2(8, 16)
 [node name="Player" type="CharacterBody2D" unique_id=849719576]
 collision_mask = 7
 script = ExtResource("1_g2els")
-JUMP_VELOCITY = -8000.0
+SPEED = 900.0
+jump_velocity = -216.0
 max_hp = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2026461492]
@@ -74,16 +76,16 @@ script = ExtResource("2_lvxji")
 current_state = NodePath("GroundState")
 player = NodePath("..")
 
-[node name="AirState" type="Node2D" parent="StateMachine" unique_id=1331647413 node_paths=PackedStringArray("ground_state")]
+[node name="AirState" type="Node2D" parent="StateMachine" unique_id=1331647413 node_paths=PackedStringArray("ground_state", "attack_state")]
 unique_name_in_owner = true
 script = ExtResource("2_gmlin")
 ground_state = NodePath("../GroundState")
+attack_state = NodePath("../AttackState")
 
 [node name="GroundState" type="Node2D" parent="StateMachine" unique_id=1509785508 node_paths=PackedStringArray("air_state", "attack_state")]
 unique_name_in_owner = true
 script = ExtResource("3_lvxji")
 air_state = NodePath("../AirState")
-jump_velocity = -500.0
 attack_state = NodePath("../AttackState")
 
 [node name="AttackState" type="Node2D" parent="StateMachine" unique_id=1253195591]
@@ -100,3 +102,14 @@ metadata/_custom_type_script = "uid://cw3cv1oet2thk"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1320153345]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_5bvic")
+
+[node name="StateLabel" type="Label" parent="." unique_id=1085147576 node_paths=PackedStringArray("state_machine")]
+visible = false
+offset_left = -35.0
+offset_top = -28.0
+offset_right = 33.0
+offset_bottom = -17.0
+theme_override_font_sizes/font_size = 7
+horizontal_alignment = 1
+script = ExtResource("8_qek5x")
+state_machine = NodePath("../StateMachine")

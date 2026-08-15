@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bd6le014lqhab"]
+[gd_scene format=3 uid="uid://dtwc23qip6cuj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bvic"]
 size = Vector2(16, 16)
@@ -9,13 +9,14 @@ collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=499304896]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_5bvic")
 one_way_collision = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=412301980]
+visible = false
 custom_minimum_size = Vector2(16, 16)
 offset_left = -8.0
-offset_top = -8.0
 offset_right = 8.0
-offset_bottom = 8.0
+offset_bottom = 16.0
 color = Color(0.7122284, 0.1177124, 0.42457762, 1)
