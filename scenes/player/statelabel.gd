@@ -5,8 +5,9 @@ extends Label
 @export var state_machine: PlayerStateMachine
 
 func _ready() -> void:
-	text = "State:" + state_machine.current_state.name
-	state_machine.state_chenged.connect(update_text)
+	if state_machine.current_state:
+		text = "State:" + state_machine.current_state.name
+		state_machine.state_chenged.connect(update_text)
 	pass
 	
 

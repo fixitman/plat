@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dtwc23qip6cuj" path="res://scenes/areas/Plat.tscn" id="2_h3qae"]
 [ext_resource type="PackedScene" uid="uid://dm73gkenfy6r" path="res://00_General/fire.tscn" id="3_h3qae"]
 [ext_resource type="Script" uid="uid://yaj05bnyuka3" path="res://scenes/areas/hud.gd" id="4_ay52s"]
+[ext_resource type="PackedScene" uid="uid://c0w8jdxkekyw2" path="res://00_General/fountain.tscn" id="5_hvyvl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxesk"]
 size = Vector2(1190, 16)
@@ -12,11 +13,13 @@ size = Vector2(1190, 16)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=342628907]
 
-[node name="HUD" type="Control" parent="CanvasLayer" unique_id=569289868]
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=1364699996]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("4_ay52s")
 
 [node name="Debug" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=1456012676]
@@ -36,14 +39,18 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 6
 text = "gravity"
 
+[node name="HP" type="Label" parent="CanvasLayer/HUD/Debug" unique_id=457503426]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "hp"
+
 [node name="Player" parent="." unique_id=849719576 instance=ExtResource("2_dgl8q")]
 unique_name_in_owner = true
 z_index = 10
-position = Vector2(213, 160)
+position = Vector2(144, 160)
 collision_layer = 2
 collision_mask = 1
-SPEED = 64.0
-JUMP_VELOCITY = -2000.0
 
 [node name="World" type="Node2D" parent="." unique_id=1259490127]
 
@@ -64,6 +71,10 @@ shape = SubResource("RectangleShape2D_lxesk")
 [node name="Fire" parent="World" unique_id=1797966165 instance=ExtResource("3_h3qae")]
 z_as_relative = false
 position = Vector2(93, 160)
+
+[node name="Fountain" parent="World" unique_id=1603320718 instance=ExtResource("5_hvyvl")]
+position = Vector2(183, 160)
+damage = -1000000
 
 [node name="1wayPlatform" parent="." unique_id=146597342 instance=ExtResource("2_h3qae")]
 position = Vector2(248, 136)

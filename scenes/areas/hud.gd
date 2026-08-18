@@ -2,15 +2,21 @@ extends Control
 @onready var velocity_y: Label = %VelocityY
 @onready var player: Player = %Player
 @onready var gravity: Label = %Gravity
+@onready var hp: Label = %HP
 
 
-# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	player.hp_changed.connect(update_hp)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if player != null && player.velocity.y <0:
-		velocity_y.text = "Velocity Y: " + str(floor(160 - player.position.y))
+	if player != null:
+		velocity_y.text = "Velocity X: " + str(player.velocity.x)
 		gravity.text = "Gravity: " + str(player.get_gravity().y)
 	
 	pass
+
+
+func update_hp(new_hp, max_hp):
+	hp.text = "HP: %s/%s" % [new_hp, max_hp]

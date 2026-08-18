@@ -15,15 +15,22 @@ func _ready() -> void:
 			child.player = player
 			child.state_machine = self
 			
+	if states.size() > 0:
+		current_state = states[0]
+	
+	
 
 func _physics_process(delta: float) -> void:
-	change_state(current_state.state_physics_process(delta))
+	var new_state = current_state.state_physics_process(delta)
+	change_state(new_state)
 
 func _process(delta: float) -> void:
-	change_state(current_state.state_process(delta))
+	var new_state = current_state.state_process(delta)
+	change_state(new_state)
 		
-func _input(event: InputEvent) -> void:
-	change_state(current_state.state_input(event))
+func _unhandled_input(event: InputEvent) -> void:
+	var new_state = current_state.state_input(event)
+	change_state(new_state)
 	
 func change_state(new_state : State) -> void:
 	if new_state == null || new_state == current_state:

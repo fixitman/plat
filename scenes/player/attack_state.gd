@@ -1,13 +1,28 @@
 class_name AttackState extends State
 
 @onready var hitbox_collider: CollisionShape2D = %CollisionShape2D
-@onready var ground_state: State = %GroundState
+
+@export var idle_state : IdleState
+@export var jump_state : JumpState
+@export var fall_state : FallState
 
 	
-func state_process(_delta: float) -> State:
-	hitbox_collider.disabled = false
-	await get_tree().create_timer(.2).timeout
-	hitbox_collider.disabled = true
-	return state_machine.previous_state
+func enter(previous_state: State) -> void:
+	player.play_animation("attack")
+	player.animation_player.animation_finished.connect(on_animation_finished)
+
+func on_animation_finished(_anim: String):
+	if player.is_on_floor():
+		state_machine.change_state(idle_state)
+	elif player.velocity.y < 0:	
+		state_machine.change_state(jump_state)	
+	else:
+		state_machine.change_state(fall_state)	
 	
+func state_physics_process(delta: float) -> State:
+	player.apply_gravity(delta)
+	player.move_and_slide()
+	return null
 	
+func exit() -> void:
+	player.animation_player.animation_finished.disconnect(on_animation_finished)
