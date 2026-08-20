@@ -10,7 +10,9 @@ signal hp_changed(new_hp : int, max_hp)
 var current_hp : int
 var direction : float
 
-func _ready() -> void:
+func _ready() -> void:	
+	#Engine.time_scale = .25
+	
 	current_hp = max_hp
 	hp_changed.emit(current_hp,max_hp)
 	pass

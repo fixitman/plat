@@ -4,20 +4,18 @@ class_name AttackState extends State
 
 @export var idle_state : IdleState
 @export var jump_state : JumpState
-@export var fall_state : FallState
 
 	
-func enter(previous_state: State) -> void:
+func enter(_previous_state: State) -> void:
 	player.play_animation("attack")
 	player.animation_player.animation_finished.connect(on_animation_finished)
 
 func on_animation_finished(_anim: String):
 	if player.is_on_floor():
 		state_machine.change_state(idle_state)
-	elif player.velocity.y < 0:	
-		state_machine.change_state(jump_state)	
 	else:
-		state_machine.change_state(fall_state)	
+		state_machine.change_state(jump_state)	
+	
 	
 func state_physics_process(delta: float) -> State:
 	player.apply_gravity(delta)

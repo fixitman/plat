@@ -6,7 +6,7 @@ extends Label
 
 func _ready() -> void:
 	if state_machine.current_state:
-		text = "State:" + state_machine.current_state.name
+		text = state_machine.current_state.name
 		state_machine.state_chenged.connect(update_text)
 	pass
 	

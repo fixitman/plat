@@ -9,6 +9,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxesk"]
 size = Vector2(1190, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bvic"]
+size = Vector2(16, 1000)
+
 [node name="area1" type="Node2D" unique_id=1656774705]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=342628907]
@@ -75,6 +78,18 @@ position = Vector2(93, 160)
 [node name="Fountain" parent="World" unique_id=1603320718 instance=ExtResource("5_hvyvl")]
 position = Vector2(183, 160)
 damage = -1000000
+
+[node name="wall" type="StaticBody2D" parent="World" unique_id=777374423]
+position = Vector2(206, 0)
+
+[node name="ColorRect" type="ColorRect" parent="World/wall" unique_id=1458180069]
+modulate = Color(0.11102348, 0.539642, 0.72278285, 1)
+offset_right = 16.0
+offset_bottom = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/wall" unique_id=1181191674]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_5bvic")
 
 [node name="1wayPlatform" parent="." unique_id=146597342 instance=ExtResource("2_h3qae")]
 position = Vector2(248, 136)

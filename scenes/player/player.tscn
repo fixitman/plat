@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://b6axvdpg86bo0" path="res://scenes/player/attack_state.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://dup2gvlcu53yq" path="res://scenes/player/statelabel.gd" id="8_qek5x"]
 [ext_resource type="Script" uid="uid://q5qlu5bktosj" path="res://scenes/player/fall_state.gd" id="9_h17s1"]
+[ext_resource type="Script" uid="uid://11wtxii2naok" path="res://scenes/player/wall_state.gd" id="10_je7p5"]
 
 [sub_resource type="Gradient" id="Gradient_3vyb7"]
 offsets = PackedFloat32Array(0.101626016, 1)
@@ -49,7 +50,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_h17s1"]
 resource_name = "attack"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -130,39 +131,50 @@ attack_state = NodePath("../AttackState")
 jump_state = NodePath("../JumpState")
 metadata/_custom_type_script = "uid://ognk76w7b18e"
 
-[node name="WalkState" type="Node" parent="StateMachine" unique_id=1753360829 node_paths=PackedStringArray("jump_state", "attack_state", "idle_state")]
+[node name="WalkState" type="Node" parent="StateMachine" unique_id=1753360829 node_paths=PackedStringArray("jump_state", "attack_state", "idle_state", "wall_state")]
 unique_name_in_owner = true
 script = ExtResource("3_lvxji")
 jump_state = NodePath("../JumpState")
 attack_state = NodePath("../AttackState")
 idle_state = NodePath("../IdleState")
+wall_state = NodePath("../WallState")
 metadata/_custom_type_script = "uid://cho0wuvu62bel"
 
-[node name="JumpState" type="Node" parent="StateMachine" unique_id=1326889603 node_paths=PackedStringArray("idle_state", "walk_state", "attack_state", "fall_state")]
+[node name="JumpState" type="Node" parent="StateMachine" unique_id=1326889603 node_paths=PackedStringArray("idle_state", "walk_state", "attack_state", "wall_state")]
 unique_name_in_owner = true
 script = ExtResource("2_gmlin")
 idle_state = NodePath("../IdleState")
 walk_state = NodePath("../WalkState")
 attack_state = NodePath("../AttackState")
-fall_state = NodePath("../FallState")
-jump_force = 2000.0
+wall_state = NodePath("../WallState")
 air_speed = 100.0
 metadata/_custom_type_script = "uid://b546tw8bmdw73"
 
-[node name="AttackState" type="Node" parent="StateMachine" unique_id=364067538 node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
+[node name="AttackState" type="Node" parent="StateMachine" unique_id=364067538 node_paths=PackedStringArray("idle_state", "jump_state")]
 unique_name_in_owner = true
 script = ExtResource("6_qek5x")
 idle_state = NodePath("../IdleState")
 jump_state = NodePath("../JumpState")
-fall_state = NodePath("../FallState")
 metadata/_custom_type_script = "uid://b6axvdpg86bo0"
 
-[node name="FallState" type="Node" parent="StateMachine" unique_id=1464839074 node_paths=PackedStringArray("idle_state", "walk_state", "attack_state")]
+[node name="FallState" type="Node" parent="StateMachine" unique_id=1464839074 node_paths=PackedStringArray("idle_state", "walk_state", "attack_state", "wall_state")]
+unique_name_in_owner = true
 script = ExtResource("9_h17s1")
 idle_state = NodePath("../IdleState")
 walk_state = NodePath("../WalkState")
 attack_state = NodePath("../AttackState")
+wall_state = NodePath("../WallState")
 metadata/_custom_type_script = "uid://q5qlu5bktosj"
+
+[node name="WallState" type="Node" parent="StateMachine" unique_id=1728877779 node_paths=PackedStringArray("idle_state", "walk_state", "attack_state", "jump_state")]
+unique_name_in_owner = true
+script = ExtResource("10_je7p5")
+idle_state = NodePath("../IdleState")
+walk_state = NodePath("../WalkState")
+attack_state = NodePath("../AttackState")
+jump_state = NodePath("../JumpState")
+wall_gravity = 50.0
+metadata/_custom_type_script = "uid://11wtxii2naok"
 
 [node name="StateLabel" type="Label" parent="." unique_id=1085147576 node_paths=PackedStringArray("state_machine")]
 offset_left = -35.0

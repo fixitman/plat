@@ -3,6 +3,7 @@ class_name FallState extends State
 @export var idle_state: IdleState
 @export var walk_state: WalkState
 @export var attack_state: AttackState
+@export var wall_state: WallState
 @export var jump_force: float = 400
 @export var air_speed: float = 200
 
@@ -19,6 +20,8 @@ func state_input(event: InputEvent) -> State:
 	return null
 	
 func state_process(_delta: float) -> State:
+	if player.is_on_wall_only() :
+		return wall_state
 	return null
 	
 func state_physics_process(delta: float) -> State:
@@ -31,6 +34,8 @@ func state_physics_process(delta: float) -> State:
 		player.velocity.x = move_toward(player.velocity.x,0,air_speed * 2 * delta)#should take .5 sec
 	player.move_and_slide()
 	
+	if player.is_on_wall_only():
+		return wall_state
 	if player.is_on_floor():
 		return walk_state if player.direction else idle_state
 	return null

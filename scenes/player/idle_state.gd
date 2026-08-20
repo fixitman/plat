@@ -8,7 +8,7 @@ class_name IdleState extends State
 func init() -> void:
 	pass
 
-func enter(previous_state: State) -> void:
+func enter(_previous_state: State) -> void:
 	player.play_animation("idle")
 	player.velocity = Vector2.ZERO
 	pass
