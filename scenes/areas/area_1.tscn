@@ -1,16 +1,21 @@
-[gd_scene format=3 uid="uid://ben8ukgdl7jhx"]
+[gd_scene format=4 uid="uid://ben8ukgdl7jhx"]
 
 [ext_resource type="PackedScene" uid="uid://cdg82mh4ljjty" path="res://scenes/player/player.tscn" id="2_dgl8q"]
-[ext_resource type="PackedScene" uid="uid://dtwc23qip6cuj" path="res://scenes/areas/Plat.tscn" id="2_h3qae"]
 [ext_resource type="PackedScene" uid="uid://dm73gkenfy6r" path="res://00_General/fire.tscn" id="3_h3qae"]
+[ext_resource type="Texture2D" uid="uid://c6ovoe55d0xjj" path="res://assets/32x32 block.png" id="3_hvyvl"]
 [ext_resource type="Script" uid="uid://yaj05bnyuka3" path="res://scenes/areas/hud.gd" id="4_ay52s"]
 [ext_resource type="PackedScene" uid="uid://c0w8jdxkekyw2" path="res://00_General/fountain.tscn" id="5_hvyvl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxesk"]
-size = Vector2(1190, 16)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eme25"]
+texture = ExtResource("3_hvyvl")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bvic"]
-size = Vector2(16, 1000)
+[sub_resource type="TileSet" id="TileSet_f4vxy"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_eme25")
 
 [node name="area1" type="Node2D" unique_id=1656774705]
 
@@ -51,45 +56,20 @@ text = "hp"
 [node name="Player" parent="." unique_id=849719576 instance=ExtResource("2_dgl8q")]
 unique_name_in_owner = true
 z_index = 10
-position = Vector2(144, 160)
+position = Vector2(89, 160)
 collision_layer = 2
 collision_mask = 1
 
 [node name="World" type="Node2D" parent="." unique_id=1259490127]
 
-[node name="Ground" type="StaticBody2D" parent="World" unique_id=1943467657]
-position = Vector2(0, 160)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="ColorRect" type="ColorRect" parent="World/Ground" unique_id=1575169996]
-offset_right = 1190.0
-offset_bottom = 16.0
-color = Color(0.13682577, 0.13682574, 0.13682571, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ground" unique_id=1073176475]
-position = Vector2(595, 8)
-shape = SubResource("RectangleShape2D_lxesk")
+[node name="TileMapLayer" type="TileMapLayer" parent="World" unique_id=1340802124]
+tile_map_data = PackedByteArray("AAAAAAUAAQAAAAAAAAABAAUAAQAAAAAAAAACAAUAAQAAAAAAAAADAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAMAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAJAAUAAQAAAAAAAAAKAAUAAQAAAAAAAAALAAUAAQAAAAAAAAAMAAUAAQAAAAAAAAANAAUAAQAAAAAAAAAOAAUAAQAAAAAAAAAPAAUAAQAAAAAAAAAQAAUAAQAAAAAAAAARAAUAAQAAAAAAAAASAAUAAQAAAAAAAAATAAUAAQAAAAAAAAAUAAUAAQAAAAAAAAAVAAUAAQAAAAAAAAAWAAUAAQAAAAAAAAAXAAUAAQAAAAAAAAAXAAAAAQAAAAAAAAAXAAEAAQAAAAAAAAAXAAIAAQAAAAAAAAAXAAMAAQAAAAAAAAAXAAQAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_f4vxy")
 
 [node name="Fire" parent="World" unique_id=1797966165 instance=ExtResource("3_h3qae")]
 z_as_relative = false
-position = Vector2(93, 160)
+position = Vector2(84, 35)
 
 [node name="Fountain" parent="World" unique_id=1603320718 instance=ExtResource("5_hvyvl")]
-position = Vector2(183, 160)
+position = Vector2(245, 45)
 damage = -1000000
-
-[node name="wall" type="StaticBody2D" parent="World" unique_id=777374423]
-position = Vector2(206, 0)
-
-[node name="ColorRect" type="ColorRect" parent="World/wall" unique_id=1458180069]
-modulate = Color(0.11102348, 0.539642, 0.72278285, 1)
-offset_right = 16.0
-offset_bottom = 1000.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/wall" unique_id=1181191674]
-position = Vector2(8, 0)
-shape = SubResource("RectangleShape2D_5bvic")
-
-[node name="1wayPlatform" parent="." unique_id=146597342 instance=ExtResource("2_h3qae")]
-position = Vector2(248, 136)

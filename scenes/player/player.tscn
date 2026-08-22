@@ -18,20 +18,20 @@ colors = PackedColorArray(1, 1, 1, 1, 0.5142446, 0.39274666, 0.06046702, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lxesk"]
 gradient = SubResource("Gradient_3vyb7")
-width = 8
-height = 16
+width = 16
+height = 48
 fill_from = Vector2(0, 0.021367522)
 fill_to = Vector2(0.5811966, 0.99572647)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8p8g"]
-size = Vector2(9.5, 2)
+size = Vector2(31.5, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bvic"]
-size = Vector2(8, 16)
+size = Vector2(16, 48)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5bvic"]
-radius = 4.0
-height = 16.0
+radius = 8.0
+height = 48.0
 
 [sub_resource type="Animation" id="Animation_5gtgg"]
 length = 0.001
@@ -75,7 +75,7 @@ collision_mask = 7
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2026461492]
-position = Vector2(0, -8)
+position = Vector2(0, -24)
 texture = SubResource("GradientTexture2D_lxesk")
 
 [node name="HitBox" type="Area2D" parent="Sprite2D" unique_id=2130456176]
@@ -88,13 +88,12 @@ metadata/_custom_type_script = "uid://b5jmwtxr8ch4b"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitBox" unique_id=1059455471]
 unique_name_in_owner = true
-position = Vector2(5.25, -8)
+position = Vector2(16.25, -8)
 shape = SubResource("RectangleShape2D_d8p8g")
 disabled = true
 debug_color = Color(0, 0.62351096, 0.53978425, 0.41960785)
 
 [node name="HurtBox" type="Area2D" parent="Sprite2D" unique_id=1392041683]
-visible = false
 position = Vector2(0, 8)
 collision_layer = 4
 collision_mask = 0
@@ -106,7 +105,7 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_5bvic")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=75990870]
-position = Vector2(0, -8)
+position = Vector2(0, -24)
 shape = SubResource("CapsuleShape2D_5bvic")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2125818135]
@@ -177,10 +176,10 @@ wall_gravity = 50.0
 metadata/_custom_type_script = "uid://11wtxii2naok"
 
 [node name="StateLabel" type="Label" parent="." unique_id=1085147576 node_paths=PackedStringArray("state_machine")]
-offset_left = -35.0
-offset_top = -28.0
-offset_right = 33.0
-offset_bottom = -17.0
+offset_left = -34.0
+offset_top = -68.0
+offset_right = 34.0
+offset_bottom = -57.0
 theme_override_font_sizes/font_size = 7
 horizontal_alignment = 1
 script = ExtResource("8_qek5x")

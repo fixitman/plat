@@ -1,6 +1,8 @@
 class_name Player extends CharacterBody2D
 
 @export var max_hp :int = 100
+@export var gravity = Globals.gravity
+
 
 @onready var sprite_2d : Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
