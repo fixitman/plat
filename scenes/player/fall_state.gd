@@ -4,13 +4,18 @@ class_name FallState extends State
 @export var walk_state: WalkState
 @export var attack_state: AttackState
 @export var wall_state: WallState
-@export var jump_force: float = 400
 @export var air_speed: float = 200
+@export var max_jump_height: float = 70
+
+
+
+var jump_force: float = -sqrt(2 * Globals.gravity * max_jump_height)
+
 
 func init() -> void:
 	pass
 
-func enter(previous_state: State) -> void:
+func enter(_previous_state: State) -> void:
 	player.play_animation("fall")
 	pass
 		

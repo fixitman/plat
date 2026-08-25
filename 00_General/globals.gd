@@ -1,2 +1,2 @@
 extends Node
-var gravity = 9.8 * 100 / 32
+var gravity = 980

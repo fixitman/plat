@@ -5,8 +5,17 @@ class_name JumpState extends State
 @export var attack_state: AttackState
 @export var wall_state: WallState
 
-@export var jump_force: float = 400
 @export var air_speed: float = 200
+@export var max_jump_height: float = 70
+@export var gravity : float = 980.0
+
+
+
+
+var jump_force: float 
+
+
+
 
 func init() -> void:
 	pass
@@ -14,7 +23,10 @@ func init() -> void:
 func enter(_previous_state: State) -> void:
 	if !player.is_on_floor():
 		return
+		
+	jump_force = sqrt(2 * gravity * max_jump_height)	
 	
+	print("jump force: ",jump_force)
 	player.velocity.y = -jump_force
 	pass
 		
@@ -31,7 +43,8 @@ func state_process(_delta: float) -> State:
 	return null
 	
 func state_physics_process(delta: float) -> State:
-	player.apply_gravity(delta)
+	#player.apply_gravity(delta)
+	player.velocity.y += gravity * delta
 	player.update_direction()
 	player.update_sprite_flip()
 	if player.direction:

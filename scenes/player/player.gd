@@ -47,7 +47,7 @@ func update_direction():
 	
 func apply_gravity(delta):
 	if !is_on_floor():
-		velocity.y += get_gravity().y * delta
+		velocity.y += Globals.gravity * delta
 	
 	
 	
