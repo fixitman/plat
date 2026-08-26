@@ -5,10 +5,7 @@ class_name IdleState extends State
 @export var jump_state : State
 
 
-func init() -> void:
-	pass
-
-func enter(_previous_state: State) -> void:
+func enter() -> void:
 	player.play_animation("idle")
 	player.velocity = Vector2.ZERO
 	pass
@@ -21,11 +18,7 @@ func state_input(event: InputEvent) -> State:
 	if event.is_action_pressed("move_left") || event.is_action_pressed("move_right"):
 		return walk_state
 	return null
-	
-func state_process(_delta: float) -> State:
-	
-	
-	return null
+
 	
 func state_physics_process(delta: float) -> State:
 	player.apply_gravity(delta)
@@ -40,6 +33,5 @@ func state_physics_process(delta: float) -> State:
 		return walk_state
 	return null
 		
-func exit() -> void:
-	pass
+
 		

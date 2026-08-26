@@ -23,7 +23,6 @@ func _ready() -> void:
 func take_damage(damage: int)-> void:
 	print("ouch!")
 	var prev_hp = current_hp
-	#current_hp -= damage
 	current_hp = clamp(current_hp - damage,0,max_hp)
 	if current_hp != prev_hp:
 		hp_changed.emit(current_hp, max_hp)

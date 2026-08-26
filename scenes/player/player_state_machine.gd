@@ -14,11 +14,14 @@ func _ready() -> void:
 			states.append(child)
 			child.player = player
 			child.state_machine = self
+			child.init()
 			
 	if states.size() > 0:
 		current_state = states[0]
 	
-	
+func _unhandled_input(event: InputEvent) -> void:
+	var new_state = current_state.state_input(event)
+	change_state(new_state)	
 
 func _physics_process(delta: float) -> void:
 	var new_state = current_state.state_physics_process(delta)
@@ -28,9 +31,7 @@ func _process(delta: float) -> void:
 	var new_state = current_state.state_process(delta)
 	change_state(new_state)
 		
-func _unhandled_input(event: InputEvent) -> void:
-	var new_state = current_state.state_input(event)
-	change_state(new_state)
+
 	
 func change_state(new_state : State) -> void:
 	if new_state == null || new_state == current_state:
@@ -41,7 +42,7 @@ func change_state(new_state : State) -> void:
 		current_state.exit()
 	
 	current_state = new_state
-	current_state.enter(previous_state)
+	current_state.enter()
 	state_chenged.emit(current_state)
 	
 	

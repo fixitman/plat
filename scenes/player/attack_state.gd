@@ -6,7 +6,7 @@ class_name AttackState extends State
 @export var jump_state : JumpState
 
 	
-func enter(_previous_state: State) -> void:
+func enter() -> void:
 	player.play_animation("attack")
 	player.animation_player.animation_finished.connect(on_animation_finished)
 

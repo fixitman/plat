@@ -14,7 +14,7 @@ var jump_requested : bool = false
 func init() -> void:
 	pass
 
-func enter(_previous_state: State) -> void:
+func enter() -> void:
 	player.play_animation("wall")
 	player.velocity = Vector2.ZERO
 	pass

@@ -20,7 +20,7 @@ var jump_force: float
 func init() -> void:
 	pass
 
-func enter(_previous_state: State) -> void:
+func enter() -> void:
 	if !player.is_on_floor():
 		return
 		
@@ -53,7 +53,7 @@ func state_physics_process(delta: float) -> State:
 		player.velocity.x = move_toward(player.velocity.x,0,air_speed * 2 * delta)#should take .5 sec
 	player.move_and_slide()
 	
-	if player.is_on_wall_only():
+	if Globals.wall_state_enabled && player.is_on_wall_only():
 		return wall_state
 	
 	if player.is_on_floor():

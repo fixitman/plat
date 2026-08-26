@@ -11,7 +11,7 @@ class_name WalkState extends State
 func init() -> void:
 	pass
 
-func enter(_previous_state: State) -> void:
+func enter() -> void:
 	player.play_animation("walk")
 	pass
 		
@@ -35,7 +35,7 @@ func state_physics_process(delta: float) -> State:
 	player.velocity.x = player.direction * SPEED
 	player.move_and_slide()
 	
-	if player.is_on_wall():
+	if Globals.wall_state_enabled && player.is_on_wall():
 		return wall_state
 	if !player.is_on_floor():
 		return jump_state
